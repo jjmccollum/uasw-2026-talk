@@ -1,0 +1,97 @@
+\documentclass[t, xcolor=table, aspectratio=169]{beamer}
+
+% Basic packages which are recommended for the KUL beamer theme
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[UKenglish]{datetime}
+
+% Apply the KUL beamer theme
+\usetheme{KUL}
+
+% The beamer theme has a dependency that overwrites the \textlatin command; undefine it here, so polyglossia's definition gets used:
+\let\textlatin\relax
+
+%-------------------------%
+% Add extra packages here %
+%-------------------------%
+\usepackage{fontspec} % Required for specifying custom fonts in XeTeX
+\usepackage{polyglossia} % For language-specific hyphenation and punctuation rules
+\setmainlanguage[variant=american]{english} % Specify main language of document (this will affect hyphentation and punctuation)
+\setotherlanguage[variant=polytonic]{greek} % You can add multiple others
+\setotherlanguage{latin} % You can add multiple others
+\usepackage[autopunct,style=american,maxlevel=3]{csquotes} % Include support for context-sensitive quotation handling
+\usepackage{rotating}
+
+% Override the beamer theme's default font settings:
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase} % ensure that the fonts have the same x-height
+\setromanfont[Ligatures=Common]{HelveticaNeue}[
+	Path=../fonts/,
+	Extension=.otf,
+	UprightFont=*Roman,
+	ItalicFont=*LightItalic,
+	BoldFont=*Bold
+] % Normal document font
+\setsansfont[Ligatures=Common]{HelveticaNeue}[
+	Path=../fonts/,
+	Extension=.otf,
+	UprightFont=*Roman,
+	ItalicFont=*LightItalic,
+	BoldFont=*Bold
+] % Sans-serif font
+\setmonofont{Courier New} % Monospace font
+\newfontfamily\greekfontsf[Script=Greek,Scale=1.0]{GFS Porson} % if you want a separate font for Greek text (used when you typeset Greek text with \textgreek)
+\newfontfamily\latinfontsf[Ligatures=Common]{LibreBaskerville}[
+	Path=../fonts/,
+	Extension=.otf,
+	UprightFont=*-Italic,
+	ItalicFont=*-Regular,
+	BoldFont=*-Bold
+] % if you want a separate font for Latin text
+
+\hyphenation{}
+
+% Set date and time format
+\newdateformat{SetNewDate}{%
+    \twodigit{\THEDAY}/\twodigit{\THEMONTH}/\THEYEAR
+}
+\SetNewDate
+
+%----------------------------------
+% METADATA
+%----------------------------------
+
+\title{From Biology to the Bible (and beyond) with Bayes}
+\subtitle{\parbox{\textwidth}{Lessons Learned, Idiosyncrasies Identified, and Promising Proposals}} % use parbox for subtitles that need more than one line
+\author{Joey McCollum}
+\date{17/11/2026}
+\institute{FTRS\,|\,RUBS, LEMMA Research Centre} % NOTE: These must be separated by commas!
+
+% \url{james.joey.mccollum@gmail.com}
+
+\begin{document}
+
+\begin{frame}[KUL-title]
+	\titlepage
+\end{frame}
+
+\begin{frame}[KUL-header]
+    \frametitle{Preliminaries}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+        \frametitle{Phylogenetics}
+        \begin{columns}[T]
+        	\begin{column}{0.4\textwidth}
+		        \begin{itemize}
+		        	\item The science of building family trees from the bottom up
+		        	\item With data almost exclusively from surviving relatives
+		        	\item In complex traditions (like those of NT books), the branches can recombine
+		        	\begin{itemize}
+		        		\item \textquote{contamination} or \textquote{lateral transfer}
+				\end{itemize}
+		        \end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,13 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node (origin) at (0,0) {\vphantom{$\Omega$}};
+	\node[hypotheticalWit] (archetype) at (0,-2) {$\omega$};
+	\node (alpha) at (-2,-4) {$\vdots$};
+	\node (beta) at (2,-4) {$\vdots$};
+	\draw[undirected] (archetype.west) -| (alpha.north);
+	\draw[undirected] (archetype.east) -| (beta.north);
+\end{tikzpicture}
+\end{document}

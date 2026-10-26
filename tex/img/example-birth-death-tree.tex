@@ -1,0 +1,58 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node (time_origin) at (-4,0) {$t_{\Omega}$};
+	\node (time_archetype) at (-4,-2) {$t_{\omega}$};
+	\node (time_alpha) at (-4,-3) {$t_{\alpha}$};
+	\node (time_beta) at (-4,-3.5) {$t_{\beta}$};
+	\node (time_gamma) at (-4,-5.5) {$t_{\gamma}$};
+	\node (time_a) at (-4,-4.5) {$t_{\mathrm{a}}$};
+	\node (time_b1) at (-4,-6) {$t_{\mathrm{b}_1}$};
+	\node (time_b2) at (-4,-6.5) {$t_{\mathrm{b}_2}$};
+	\node (time_c1) at (-4,-7) {$t_{\mathrm{c}_1}$};
+	\node (time_c2) at (-4,-8) {$t_{\mathrm{c}_2}$};
+	\node (time_0) at (-4,-9) {$0$};
+	\draw[dashed] (time_origin) -- (time_archetype) -- (time_alpha) -- (time_beta) -- (time_a) -- (time_gamma) -- (time_b1) -- (time_b2) -- (time_c1) -- (time_c2) -- (time_0);
+	\node (origin_birth) at (-3,0) {};
+	\node[hypotheticalChild] (archetype_birth) at (-3,-2) {};
+	\node[hypotheticalChild] (alpha_birth) at (-2,-3) {};
+	\node[hypotheticalChild] (beta_birth) at (-2,-3.5) {};
+	\node[extantChild] (a_birth) at (2,-4.5) {};
+	\node[hypotheticalChild] (gamma_birth) at (2,-5.5) {};
+	\node[extantChild] (b1_birth) at (-1,-6) {};
+	\node[extantChild] (b2_birth) at (-1,-6.5) {};
+	\node[extantChild] (c1_birth) at (3,-7) {};
+	\node[extantChild] (c2_birth) at (3,-8) {};
+	\node (origin) at (-3,-9) {};
+	\node (archetype) at (-2,-9) {};
+	\node (alpha) at (2,-9) {};
+	\node (beta) at (-1,-9) {};
+	\node (gamma) at (3,-9) {};
+	\node (a) at (6,-9) {$\mathrm{a}$};
+	\node (b1) at (1,-9) {$\mathrm{b}_1$};
+	\node (b2) at (0,-9) {$\mathrm{b}_2$};
+	\node (c1) at (5,-9) {$\mathrm{c}_1$};
+	\node (c2) at (4,-9) {$\mathrm{c}_2$};
+	\draw[undirected] (origin_birth.south) -| (archetype_birth.north);
+	\draw[undirected] (archetype_birth.east) -| (alpha_birth.north);
+	\draw[dashed] (archetype_birth.south) -| (origin);
+	\draw[undirected] (alpha_birth.south) -| (beta_birth.north);
+	\draw[undirected] (alpha_birth.east) -| (a_birth.north);
+	\draw[dashed] (beta_birth.south) -| (archetype);
+	\draw[undirected] (a_birth.south) -| (gamma_birth.north);
+	\draw[dashed] (gamma_birth.south) -| (alpha);
+	\draw[undirected] (beta_birth.east) -| (b1_birth.north);
+	\draw[undirected] (b1_birth.south) -| (b2_birth.north);
+	\draw[dashed] (b2_birth.south) -| (beta);
+	\draw[undirected] (gamma_birth.east) -| (c1_birth.north);
+	\draw[undirected] (c1_birth.south) -| (c2_birth.north);
+	\draw[dashed] (c2_birth.south) -| (gamma);
+	\draw[undirected, line width=3pt] (a_birth) -| (a);
+	\draw[undirected, line width=3pt] (b1_birth) -| (b1);
+	\draw[undirected, line width=3pt] (b2_birth) -| (b2);
+	\draw[undirected, line width=3pt] (c1_birth) -| (c1);
+	\draw[undirected, line width=3pt] (c2_birth) -| (c2);
+\end{tikzpicture}
+\end{document}

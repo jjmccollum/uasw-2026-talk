@@ -1,0 +1,69 @@
+% Declare the package that this style file will produce, along with its formal name:
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{phylogenetic-diagrams}[2023/11/30 Phylogenetic Diagrams Style File]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations,positioning}
+\usetikzlibrary{decorations.markings}
+
+\pgfdeclaredecoration{sl}{initial}{
+	\state{initial}[width=\pgfdecoratedpathlength-1sp]{
+		\pgfmoveto{\pgfpointorigin}
+	}
+	\state{final}{
+		\pgflineto{\pgfpointorigin}
+	}
+}
+
+\makeatletter\def\tikz@align@newline{\vphantom{bg}\pgfutil@protect\tikz@align@newline@}%to redefine new lines in tikz nodes
+
+\tikzset{witReading/.style={align=center,execute at end node=\vphantom{bg}}}
+\tikzset{extantWit/.style={draw,solid,circle,execute at end node=\vphantom{bg}}}
+\tikzset{hypotheticalWit/.style={draw,dashed,circle,execute at end node=\vphantom{bg}}}
+\tikzset{extantChild/.style={draw,solid,circle,fill=black,line width=1pt,text width=6pt,inner sep=0pt}}
+\tikzset{hypotheticalChild/.style={draw,solid,circle,fill=white,line width=1pt,text width=6pt,inner sep=0pt}}
+\tikzset{directed/.style={->,>=stealth,line width=1.0pt}}% for directed edges
+\tikzset{undirected/.style={line width=1.0pt}}% for undirected edges
+\tikzset{parallelhighundirected/.style={line width=1.0pt,decoration={sl,raise=1pt},decorate}}% for undirected higher edge in pairs of parallel edges
+\tikzset{parallellowundirected/.style={line width=1.0pt,decoration={sl,raise=-1pt},decorate}}% for undirected lower edge in pairs of parallel edges
+\tikzset{parallelhighdirected/.style={->,>=stealth,line width=1.0pt,decoration={sl,raise=1pt},decorate}}% for undirected higher edge in pairs of parallel edges
+\tikzset{parallellowdirected/.style={->,>=stealth,line width=1.0pt,decoration={sl,raise=-1pt},decorate}}% for undirected lower edge in pairs of parallel edges
+\tikzset{contact/.style={->,>=stealth,line width=3.0pt,blue}}% for undirected higher edge in pairs of parallel edges
+\RequirePackage{array} % for fixed-width centered columns
+\RequirePackage{xcolor} % for custom colors
+\definecolor{darkgreen}{HTML}{008000}
+\RequirePackage{polyglossia} % for language-specific hyphenation and punctuation rules
+\RequirePackage{unicode-math} % for using Unicode Greek characters in math mode
+\setmainlanguage[variant=american]{english} % Specify main language of document (this will affect hyphentation and punctuation)
+\setotherlanguage[variant=polytonic]{greek} % Add any other languages that you plan to use in your thesis
+\setromanfont[Ligatures=Common, Numbers={Tabular,OldStyle}]{EBGaramond12}[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	ItalicFont=*-Italic
+]
+\newfontfamily\greekfont{EBGaramond12}[
+	Extension=.otf,
+	UprightFont=*-Regular,
+	ItalicFont=*-Italic
+]
+\setmathfont{Garamond-Math}[
+	Path=../fonts/,
+	Extension=.otf,
+	StylisticSet={8}
+]
+% Use Pardo's version of EB Garamond Italic for mathcal symbols, as it has more extensive coverage of swash glyphs:
+\setmathfont{EBGaramond-Italic}[
+	Path=../fonts/,
+	Extension=.otf,
+	range={cal},
+	RawFeature={+swsh}
+]
+% Use upright font instead of italic for uppercase and lowercase Greek letters in math mode:
+\setmathfont{EBGaramond12-Regular}[
+	Path=../fonts/,
+	Extension=.otf,
+	range={it/{Greek,greek}}
+]
+\renewcommand{\textgreek}[1]{{\selectlanguage{greek}#1}}
+\RequirePackage{realscripts} % Update \textsubscript and \textsuperscript to use true OpenType-accessed sub- and superscripts
+\endinput
