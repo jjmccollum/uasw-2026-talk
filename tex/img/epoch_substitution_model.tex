@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{backgrounds}
+
+\begin{document}
+\begin{tikzpicture}
+	% Time axis:
+	\node (time_epoch_2) at (-2,2) {$t_{e_2}$};
+	\node (time_epoch_1) at (-2,-1) {$t_{e_1}$};
+	% Nodes
+	\draw (0, 0.5) node[hypotheticalWit](ancestor) {$\alpha$\strut};
+	\draw (0, -1) node[minimum size=0pt,inner sep=0pt, outer sep=0pt] (epoch_boundary) {};
+	\draw (0, -2) node[hypotheticalWit](descendant) {$\delta$\strut};
+	% Edges
+	\draw[line width=1pt, dashed] (time_epoch_2) -- (time_epoch_1) -- (-2,-4);
+	\draw [line width=3pt, red!75!black] (0, 2) -- (ancestor) -- (epoch_boundary);
+	\draw [line width=3pt, green!50!black] (epoch_boundary) -- (descendant) -- (0, -4);
+	% Labels
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,1.9) -- (2,-0.9) node [midway, xshift=1in, text width=1.25in, align=left] {$\mathbf{Q} = \begin{bmatrix} -1 & 1 \\ \beta & -\beta \end{bmatrix}$};
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,-1.1) -- (2,-3.9) node [midway, xshift=1in, text width=1.25in, align=left] {$\mathbf{Q} = \begin{bmatrix} -1 & 1 \\ \beta + \gamma & -(\beta+\gamma) \end{bmatrix}$};
+\end{tikzpicture}
+\end{document}

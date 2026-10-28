@@ -1,0 +1,29 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node[hypotheticalWit] (alpha) at (0*360/6:2) {\textgreek{α}};
+	\node[hypotheticalWit] (beta) at (1*360/6:2) {\textgreek{β}};
+	\node[hypotheticalWit] (gamma) at (5*360/6:2) {\textgreek{γ}};
+	\node[extantWit] (a) at (0*360/6:4) {a};
+	\node[extantWit] (b1) at (1*360/6:4) {b\textsubscript{1}};
+	\node[extantWit] (b2) at (2*360/6:2) {b\textsubscript{2}};
+	\node[extantWit] (c1) at (4*360/6:2) {c\textsubscript{1}};
+	\node[extantWit] (c2) at (5*360/6:4) {c\textsubscript{2}};
+	\draw (alpha) edge (beta);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {|};}}] (alpha) edge[decorate] (beta);
+	\draw (alpha) edge (a);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {|};}}] (alpha) edge[decorate] (a);
+	\draw (alpha) edge (gamma);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {|};}}] (alpha) edge[decorate] (gamma);
+	\draw (beta) edge (b1);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {||};}}] (beta) edge[decorate] (b1);
+	\draw (beta) edge (b2);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {|};}}] (beta) edge[decorate] (b2);
+	\draw (gamma) edge (c1);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {||};}}] (gamma) edge[decorate] (c1);
+	\draw (gamma) edge (c2);
+	\path[decoration={markings, mark=at position .5  with {\node[transform shape] {|};}}] (gamma) edge[decorate] (c2);
+\end{tikzpicture}
+\end{document}
