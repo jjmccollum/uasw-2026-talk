@@ -77,7 +77,7 @@
 \begin{frame}[KUL-standard]
 	{\color{KUL-BLUE}\LARGE{But First, Funding}}\par
 	\begin{center}
-		\includegraphics[scale=0.3]{../img/erc-logo.jpg} \hfill \raisebox{6mm}{\includegraphics[scale=0.3]{../img/fwo-logo.png}} \hfill \raisebox{6mm}{\includegraphics[scale=0.3]{../img/odysseus-logo.png}}
+		\includegraphics[scale=0.4]{../img/erc-logo.jpg} \hfill \raisebox{16mm}{\includegraphics[scale=0.3]{../img/fwo-logo.png}} \hfill \raisebox{16mm}{\includegraphics[scale=0.3]{../img/odysseus-logo.png}}
 	\end{center}
 \end{frame}
 
@@ -94,7 +94,7 @@
 					\item sites/characters = variation units
 					\item states = variant readings
 				\end{itemize}
-				\item Minimal adaptation beyond allowing for variable numbers of states at different sites
+				\item Little adaptation needed beyond allowing for variable numbers of states at different sites
 			\end{itemize}
 		\end{column}
         	\begin{column}{0.55\textwidth}
@@ -103,6 +103,38 @@
 			\footnotesize Source: Adrian C. Barbrook et al., \textquote{The phylogeny of \emph{The Canterbury Tales}}, \emph{Nature} 394 (1998): 839
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	\begin{columns}[T]
+        		\begin{column}{0.6\textwidth}
+			Parsimony-based approaches get their efficiency from simplifying assumptions standard in biology
+        			\begin{itemize}
+     				\item The states, time, and placement of the root of the tree are unknown
+				\item Changes are \emph{time-reversible} (same cost regardless of the direction in which they occur)
+				\item Root chosen after a low-cost unrooted tree is found
+        			\end{itemize}
+			\vspace{\baselineskip}
+			\raisebox{2.5mm}{\includegraphics[scale=0.4]{../img/stemma-unrooted-potential-roots.pdf}}
+			\hfill
+			\raisebox{17mm}{$\Rightarrow$}
+			\hfill
+			\includegraphics[scale=0.4]{../img/stemma-rooted.pdf}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../img/stemma-unrooted.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	But in text-critical applications, these assumptions prevent parsimony-based approaches from leveraging valuable evidence
+	\begin{itemize}
+		\item \emph{Intrinsic probabilities} for states at the origin, describing our priors about which readings are most likely authorial
+		\item \emph{Transcriptional probabilities} for transitions between readings, especially in cases where changes are more likely in one direction than in the other
+		\item Dated evidence (e.g., paratexts) and time-specific influences on transmission
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[KUL-standard]

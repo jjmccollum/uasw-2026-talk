@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node[hypotheticalWit] (origin) at (0,2) {\textgreek{Ω}};
+	\node[hypotheticalWit] (archetype) at (0,0) {\textgreek{ω}};
+	\node[hypotheticalWit] (alpha) at (-4,-2) {\textgreek{α}};
+	\node[hypotheticalWit] (beta) at (4,-2) {\textgreek{β}};
+	\node[extantWit] (a) at (-6,-4) {a};
+	\node[hypotheticalWit] (gamma) at (-2,-4) {\textgreek{γ}};
+	\node[extantWit] (b1) at (2,-4) {b\textsubscript{1}};
+	\node[extantWit] (b2) at (6,-4) {b\textsubscript{2}};
+	\node[extantWit] (c1) at (-3,-6) {c\textsubscript{1}};
+	\node[extantWit] (c2) at (-1,-6) {c\textsubscript{2}};
+	\draw (origin) edge[directed] (archetype);
+	\draw (archetype) edge[directed] (alpha);
+	\draw (archetype) edge[directed] (beta);
+	\draw (alpha) edge[directed] (a);
+	\draw (alpha) edge[directed] (gamma);
+	\draw (beta) edge[directed] (b1);
+	\draw (beta) edge[directed] (b2);
+	\draw (gamma) edge[directed] (c1);
+	\draw (gamma) edge[directed] (c2);
+\end{tikzpicture}
+\end{document}
