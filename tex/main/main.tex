@@ -131,21 +131,60 @@
 \begin{frame}[KUL-standard]
 	But in text-critical applications, these assumptions prevent parsimony-based approaches from leveraging valuable evidence in their evaluation of candidate tree topologies
 	\begin{itemize}
-		\item \emph{Intrinsic probabilities} for states at the origin, describing our priors about which readings are most likely authorial
+		\item \emph{Intrinsic probabilities} for states at the origin, describing our priors about which readings are most likely authorial (based on philological judgments)
 		\item \emph{Transcriptional probabilities} for transitions between readings, especially in cases where changes are more likely in one direction than in the other
 		\item Dated features (e.g., paratexts) and time-specific influences on transmission
 	\end{itemize}
 	\vspace{\baselineskip}
 	Without this evidence, parsimony-based approaches can only yield stemmata of \emph{texts} as opposed to stemmata of \emph{manuscripts} (Bordalejo 2016)\par
 	\vspace{\baselineskip}
-	They can also diverge from the true stemma due to long branch attraction and statistical inconsistency (Felsenstein 2004)
+	The best-found tree can also diverge from the true stemma due to long branch attraction and statistical inconsistency (Felsenstein 2004)
 \end{frame}
 
 \begin{frame}[KUL-standard]
         \begin{columns}[T]
-        	\begin{column}{0.3\textwidth}
-		        \centering
+        		\begin{column}{0.6\textwidth}
+			To get around these limitations, I turned to \emph{Bayesian phylogenetics}
+			\begin{itemize}
+		        		\item Estimates the posterior distribution of hypotheses (consisting of a tree's topology and latent transmissional parameters) in light of our collation data using Bayes's rule:
+		        \end{itemize}
+		        \begin{equation*}
+				{\color{blue}\overbrace{\color{black}\Pr(\mathcal{H} \mid \mathcal{D})}^{\strut\text{Posterior}}}
+				= \frac{
+					{\color{red}\overbrace{\color{black}\Pr(\mathcal{D} \mid \mathcal{H})}^{\strut\text{Explanatory Power}}}
+					{\color{green!50!black}\overbrace{\color{black}\Pr(\mathcal{H})}^{\strut\text{Prior}}}
+				}{
+					{\color{orange}\underbrace{{\color{black}\Pr(\mathcal{D})}}_{\strut\text{Marginal Probability}}}
+				}
+			\end{equation*}
+			\begin{itemize}
+		        		\item Accommodates our uncertainty about the process and provides a measure of the certainty of the results
+		        \end{itemize}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\centering
 			\fbox{\includegraphics[width=\textwidth]{../img/thesis-title-page.pdf}}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	I assumed an oriented tree topology, with reading priors defined \textquote{root frequencies} at an origin above the root
+	\begin{itemize}
+		\item This allows us to model primitive errors behind the archetype of the surviving tradition, in cases where conjectural emendation is needed
+	\end{itemize}
+	\vspace{\baselineskip}
+	\includegraphics[scale=1.0]{../img/stemma-root-only.pdf}
+	\hfill
+	\raisebox{17mm}{\LARGE$\Rightarrow$}
+	\hfill
+	\includegraphics[scale=1.0]{../img/stemma-root-and-origin.pdf}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+        \begin{columns}[T]
+        		\begin{column}{0.3\textwidth}
+			Comparative analysis with \texttt{stemma}
 		\end{column}
 		\begin{column}{0.6\textwidth}
 			\centering
