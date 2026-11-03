@@ -148,17 +148,11 @@
 			\begin{itemize}
 		        		\item Estimates the posterior distribution of hypotheses (consisting of a tree's topology and latent transmissional parameters) in light of our collation data using Bayes's rule:
 		        \end{itemize}
-		        \begin{equation*}
-				{\color{blue}\overbrace{\color{black}\Pr(\mathcal{H} \mid \mathcal{D})}^{\strut\text{Posterior}}}
-				= \frac{
-					{\color{red}\overbrace{\color{black}\Pr(\mathcal{D} \mid \mathcal{H})}^{\strut\text{Explanatory Power}}}
-					{\color{green!50!black}\overbrace{\color{black}\Pr(\mathcal{H})}^{\strut\text{Prior}}}
-				}{
-					{\color{orange}\underbrace{{\color{black}\Pr(\mathcal{D})}}_{\strut\text{Marginal Probability}}}
-				}
-			\end{equation*}
+		        \begin{center}
+				\includegraphics[scale=1.25]{../img/bayes-rule.pdf}
+			\end{center}
 			\begin{itemize}
-		        		\item Accommodates our uncertainty about the process and provides a measure of the certainty of the results
+		        		\item Accommodates our uncertainty about the process and measures the certainty of the results
 		        \end{itemize}
 		\end{column}
 		\begin{column}{0.35\textwidth}
@@ -168,17 +162,110 @@
 	\end{columns}
 \end{frame}
 
+% TODO: Add a slide for the uncorrelated random branch rate model and the BDSKY tree prior
+
 \begin{frame}[KUL-standard]
-	I assumed an oriented tree topology, with reading priors defined \textquote{root frequencies} at an origin above the root
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
 	\begin{itemize}
-		\item This allows us to model primitive errors behind the archetype of the surviving tradition, in cases where conjectural emendation is needed
+		\item Oriented tree topology, with an origin above the root where reading priors defined as \textquote{root frequencies}
+		\item This allows us to model primitive errors behind the archetype of the surviving tradition in cases where conjectural emendation is needed
 	\end{itemize}
 	\vspace{\baselineskip}
 	\includegraphics[scale=1.0]{../img/stemma-root-only.pdf}
 	\hfill
-	\raisebox{17mm}{\LARGE$\Rightarrow$}
+	\raisebox{20mm}{\LARGE$\Rightarrow$}
 	\hfill
 	\includegraphics[scale=1.0]{../img/stemma-root-and-origin.pdf}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\begin{columns}[T]
+        	\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Tree prior that assumes an underlying process of birth (copying) and death (loss) events, as well as the incomplete sampling of surviving manuscripts in the collation
+				\item A rich and active area of research (Weitzman 1987; Cisne 2005; Camps and Randon-Furling 2022; Kestemont et al. 2022; Camps, Randon-Furling, and Godreau 2026)
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{../img/weitzman-greek-birth-death-rates.png}\par
+			\footnotesize
+			Source: Michael P. Weitzman, \textquote{The Evolution of Manuscript Traditions}, \emph{Journal of the Royal Statistical Society} A.150/4 (1987): 287–308
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\begin{itemize}
+		\item To account for different birth and death rates in different periods, I used the \emph{birth-death-shift} model (Stadler 2011), with slight modifications
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{../img/birth-death-shift-model.jpeg}\par
+		\footnotesize
+		Source: Tanja Stadler, \textquote{Mammalian Phylogeny Reveals Recent Diversification Rate Shifts}, \emph{PNAS} 108.15 (2011): 6187–92
+	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\begin{columns}[T]
+        	\begin{column}{0.45\textwidth}
+			\begin{itemize}
+				\item To account for variations in copyinbg fidelity among different scribes, I used an uncorrelated relaxed clock model
+				\begin{itemize}
+					\item Expected changes/site/year along different branches assumed to be independently and identically distributed according to a log-normal distribution
+					\item Mean and standard deviation of the distribution estimated in the analysis
+				\end{itemize}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../img/uncorrelated-clock-model.png}\par
+			\footnotesize
+			Source: Haobo Yuan et al., \textquote{Empirical evidence and robustness of clock models with spikes}, bioRxiv preprint (\url{https://doi.org/10.64898/2026.08.11.744144})
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\begin{itemize}
+		\item Rate parameters for scribal tendencies to account for their different relative frequencies
+		\begin{itemize}
+			\item E.g., confusions of similar sounds, visual errors (like haplography), semantic changes
+		\end{itemize}
+		\item Used in custom (potentially non-time-reversible) substitution models
+	\end{itemize}
+	\begin{center}
+		\includegraphics[scale=1]{../img/substitution-model-example.pdf}
+	\end{center}
+	\begin{itemize}
+		\item Their posterior distributions give us estimates of specific scribal habits
+	\end{itemize}
+	\begin{center}
+		\includegraphics[scale=0.2]{../img/scribal-habits-estimates.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\begin{columns}[T]
+        	\begin{column}{0.4\textwidth}
+			\begin{itemize}
+				\item Epoch-based substitution models that can account for time-dependent transcriptional factors
+				\begin{itemize}
+					\item Assimilation to the popular text of the Byzantine period
+					\item Linguistic forces operative in post-classical or medieval Greek
+					\item Visual confusions only possible in majuscule or minuscule script
+				\end{itemize}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.55\textwidth}
+			\includegraphics[width=\textwidth]{../img/epoch-substitution-model.pdf}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[KUL-standard]

@@ -1,0 +1,14 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}
+	\node (equation) at (0,0) {$\begin{aligned}{\color{blue}\overbrace{\color{black}\Pr(\mathcal{H} \mid \mathcal{D})}^{\strut\text{Posterior}}}
+				&= \frac{
+					{\color{red}\overbrace{\color{black}\Pr(\mathcal{D} \mid \mathcal{H})}^{\strut\text{Explanatory Power}}}
+					{\color{green!50!black}\overbrace{\color{black}\Pr(\mathcal{H})}^{\strut\text{Prior}}}
+				}{
+					{\color{orange}\underbrace{{\color{black}\Pr(\mathcal{D})}}_{\strut\text{Marginal Probability}}}
+				}\end{aligned}$};
+\end{tikzpicture}
+\end{document}
