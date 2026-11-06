@@ -216,16 +216,26 @@
             \hspace*{-0.032\paperwidth}
             \includegraphics[width=.166\paperwidth]{\KULlogopath}
             \hspace{0pt}
-            \vfill
+            %\vfill
             \begin{tikzpicture}[remember picture, overlay]
-            	\node[inner sep=0pt, xshift=0.89\paperwidth, yshift=-0.42\paperheight, opacity=0.1] at (0,0) {
+            	\node[inner sep=0pt, xshift=0.7375\paperwidth, yshift=-0.7\paperheight, opacity=0.1] at (0,0) {
 	            \includegraphics[width=0.6\paperwidth]{res/sedes_sapientiae.eps}% use EPS instead of PDF so that transparency works with XeLaTeX
 	        };
             \end{tikzpicture}
+            \par
             \LARGE\inserttitle
-            \vfill
+            \par
+            \large\vspace{12pt}
+            %\vfill
             \large\insertsubtitle
-            \\\indent \phantom{X}
+            \par
+            \vspace{28pt}
+            \fcolorbox{black}{white}{\includegraphics[height=0.1375\paperheight]{res/erc-logo.png}}
+            \hspace{1em}
+            \fcolorbox{black}{white}{\includegraphics[height=0.1375\paperheight]{res/fwo-logo.png}}
+            \hspace{1em}
+            \fcolorbox{black}{white}{\includegraphics[height=0.1375\paperheight]{res/odysseus-logo.png}}
+            %\\\indent \phantom{X}
             \hspace{0pt}
         \end{minipage}
     \end{beamercolorbox}%

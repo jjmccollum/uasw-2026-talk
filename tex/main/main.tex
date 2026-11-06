@@ -23,6 +23,7 @@
 \usepackage{rotating}
 
 % Override the beamer theme's default font settings:
+\usefonttheme{professionalfonts} % use Computer Modern for math mode
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase} % ensure that the fonts have the same x-height
 \setromanfont[Ligatures=Common]{HelveticaNeue}[
 	Path=../fonts/,
@@ -75,13 +76,6 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	{\color{KUL-BLUE}\LARGE{But First, Funding}}\par
-	\begin{center}
-		\includegraphics[scale=0.4]{../img/erc-logo.jpg} \hfill \raisebox{16mm}{\includegraphics[scale=0.3]{../img/fwo-logo.png}} \hfill \raisebox{16mm}{\includegraphics[scale=0.3]{../img/odysseus-logo.png}}
-	\end{center}
-\end{frame}
-
-\begin{frame}[KUL-standard]
         \begin{columns}[T]
         	\begin{column}{0.4\textwidth}
         		{\color{KUL-BLUE}\LARGE{Our Story Starts}}\par
@@ -106,26 +100,23 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	\begin{columns}[T]
-        		\begin{column}{0.6\textwidth}
-			Parsimony-based approaches get their efficiency from simplifying assumptions standard in biology
-        			\begin{itemize}
-     				\item The states, time, and placement of the root of the tree are unknown
-				\item Changes are \emph{time-reversible} (same cost regardless of the direction in which they occur)
-				\item Root chosen after a low-cost unrooted tree is found
-        			\end{itemize}
-			\vspace{\baselineskip}
-			\raisebox{2.5mm}{\includegraphics[scale=0.4]{../img/stemma-unrooted-potential-roots.pdf}}
-			\hfill
-			\raisebox{17mm}{$\Rightarrow$}
-			\hfill
-			\includegraphics[scale=0.4]{../img/stemma-rooted.pdf}
-		\end{column}
-		\begin{column}{0.35\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{../img/stemma-unrooted.pdf}
-		\end{column}
-	\end{columns}
+	Parsimony-based approaches get their efficiency from simplifying assumptions standard in biology
+        \begin{itemize}
+     		\item The states, time, and placement of the root of the tree are unknown
+		\item Changes are \emph{time-reversible} (same cost regardless of the direction in which they occur)
+		\item Find the lowest-cost unrooted tree, then choose the placement of the root
+        \end{itemize}
+	\begin{center}
+		\raisebox{2.75mm}{\includegraphics[scale=0.5]{../img/stemma-unrooted.pdf}}
+		\hfill
+		\raisebox{20.75mm}{$\Rightarrow$}
+		\hfill
+		\raisebox{2.75mm}{\includegraphics[scale=0.5]{../img/stemma-unrooted-potential-roots.pdf}}
+		\hfill
+		\raisebox{20.75mm}{$\Rightarrow$}
+		\hfill
+		\includegraphics[scale=0.5]{../img/stemma-rooted.pdf}
+	\end{center}
 \end{frame}
 
 \begin{frame}[KUL-standard]
@@ -152,7 +143,7 @@
 				\includegraphics[scale=1.25]{../img/bayes-rule.pdf}
 			\end{center}
 			\begin{itemize}
-		        		\item Accommodates our uncertainty about the process and measures the certainty of the results
+		        		\item Accommodates our priors (in varying degrees of certainty) and measures the certainty of the results
 		        \end{itemize}
 		\end{column}
 		\begin{column}{0.35\textwidth}
@@ -165,9 +156,10 @@
 % TODO: Add a slide for the uncorrelated random branch rate model and the BDSKY tree prior
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{itemize}
-		\item Oriented tree topology, with an origin above the root where reading priors defined as \textquote{root frequencies}
+		\item \emph{Oriented topology} with a branch to the origin above the root (i.e., archetype)
+		\item Reading priors at origin defined as \textquote{root frequencies}
 		\item This allows us to model primitive errors behind the archetype of the surviving tradition in cases where conjectural emendation is needed
 	\end{itemize}
 	\vspace{\baselineskip}
@@ -179,11 +171,11 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{columns}[T]
         	\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Tree prior that assumes an underlying process of birth (copying) and death (loss) events, as well as the incomplete sampling of surviving manuscripts in the collation
+				\item \emph{Tree prior} that assumes an underlying process of birth (copying) and death (loss) events, as well as the incomplete sampling of surviving manuscripts in the collation
 				\item A rich and active area of research (Weitzman 1987; Cisne 2005; Camps and Randon-Furling 2022; Kestemont et al. 2022; Camps, Randon-Furling, and Godreau 2026)
 			\end{itemize}
 		\end{column}
@@ -197,7 +189,7 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{itemize}
 		\item To account for different birth and death rates in different periods, I used the \emph{birth-death-shift} model (Stadler 2011), with slight modifications
 	\end{itemize}
@@ -209,11 +201,11 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{columns}[T]
         	\begin{column}{0.45\textwidth}
 			\begin{itemize}
-				\item To account for variations in copyinbg fidelity among different scribes, I used an uncorrelated relaxed clock model
+				\item To account for variations in copyinbg fidelity among different scribes, I used an \emph{uncorrelated relaxed clock model}
 				\begin{itemize}
 					\item Expected changes/site/year along different branches assumed to be independently and identically distributed according to a log-normal distribution
 					\item Mean and standard deviation of the distribution estimated in the analysis
@@ -230,9 +222,9 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{itemize}
-		\item Rate parameters for scribal tendencies to account for their different relative frequencies
+		\item \emph{Rate parameters} for scribal tendencies to account for their different relative frequencies
 		\begin{itemize}
 			\item E.g., confusions of similar sounds, visual errors (like haplography), semantic changes
 		\end{itemize}
@@ -250,11 +242,11 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-	This also allowed me to adopt (and adapt) models from biology for textual transmission...
+	\textbf{So I adopted (and adapted) Bayesian phylogenetic models from biology...}
 	\begin{columns}[T]
         	\begin{column}{0.4\textwidth}
 			\begin{itemize}
-				\item Epoch-based substitution models that can account for time-dependent transcriptional factors
+				\item \emph{Epoch-based substitution models} that can account for time-dependent transcriptional factors
 				\begin{itemize}
 					\item Assimilation to the popular text of the Byzantine period
 					\item Linguistic forces operative in post-classical or medieval Greek
@@ -269,17 +261,77 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-        \begin{columns}[T]
-        		\begin{column}{0.3\textwidth}
-			Comparative analysis with \texttt{stemma}
+	\begin{columns}[T]
+        	\begin{column}{0.4\textwidth}
+        		\textbf{The results were promising...}
+		        \begin{itemize}
+		        	\item Scalable with $189$ witnesses
+		        	\item Correctly isolated known textual families
+		        	\item Consistently inferred an early \textquote{Eastern}-\textquote{Western} split, in agreement with traditional theories of New Testament transmission history (Westcott and Hort 1882)
+		        	\item Estimates of the relative frequencies of different types of transcriptional changes largely agreed with the findings of scribal habits studies
+		        \end{itemize}
 		\end{column}
-		\begin{column}{0.6\textwidth}
+		\begin{column}{0.55\textwidth}
 			\centering
 			\begin{turn}{270}
 				\includegraphics[height=0.5\textwidth]{../img/ephesians-densitree.pdf}
 			\end{turn}
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	\begin{columns}[T]
+        	\begin{column}{0.775\textwidth}
+			\textbf{...though some issues stood out}
+		        \begin{itemize}
+		        	\item Posterior probabilities of readings at the origin seemed a bit \emph{too} confident ($98$ to $100\%$)
+		        	\begin{itemize}
+		        		\item Even in cases where the prior probability assigned to one reading was $100$ times higher than those assigned to other readings!
+				\end{itemize}
+				\item Likely cause: low estimated branch rates (with a mean of $0.000102$ to $0.000119$ changes/variation unit/year in $95\%$ of the samples)
+				\begin{itemize}
+					\item High agreement among the majority of later witnesses $\Rightarrow$ bias towards careful copying 
+				\end{itemize}
+				\item Tree height constrained by the work's composition date + long branches leading to early witnesses to account for their lower levels of agreement $\Rightarrow$ branches closer to the origin become increasingly shorter $\Rightarrow$ virtually no expected changes at the earliest part of the tradition!
+				\item \textbf{Lesson}: \emph{calibrating the clock is crucial!}
+		        \end{itemize}
+		\end{column}
+		\begin{column}{0.175\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../img/ephesians-mcc-tree.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+        \begin{columns}[T]
+        	\begin{column}{0.5\textwidth}
+        		\textbf{...though some issues stood out}
+        		\begin{itemize}
+        			\item \emph{Contamination} (inheritance of material from multiple lineages) is a known problem in the New Testament tradition, and I did not incorporate Bayesian phylogenetic models to account for it
+        			\item To compensate, I performed a comparative analysis with \texttt{stemma} (Carlson 2015), a parsimony-based method designed to model reticulations between different parts of a tradition explicitly
+        		\end{itemize}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../img/ephesians-stemma-output-sample.png}
+		\end{column}
+	\end{columns}
+	\begin{itemize}
+		\item Consistent identifications of families and larger branches, but \texttt{stemma} uncovered relationships between these extremes that Bayesian phylogenetics did not
+		\item \textbf{Lesson}: \emph{mixture must be modeled!}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	\textbf{...though some issues stood out}
+        \begin{itemize}
+        	\item In my discussion of the results, I theorized that popular paratextual features (like accompanying commentaries and the Euthalian apparatus) served as vectors for textual mixture when they were copied into new manuscripts
+        	\item Adding such features to the collation could inform inferences about when and where contamination took place
+        	\item Moving from a stemma of \textquote{dated sequences of readings} to something closer to a stemma of physical manuscripts
+		\item \textbf{Lesson}: \emph{encode extratextual evidence!}
+	\end{itemize}
 \end{frame}
 
 \end{document}
