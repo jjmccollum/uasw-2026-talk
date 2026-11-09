@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node (time_archetype) at (-4,0) {$t_{\alpha}$};
+	\node (time_a1) at (-4,-2) {$t_{a_1}$};
+	\node (time_a2) at (-4,-3) {$t_{a_2}$};
+	\node (time_a3) at (-4,-4) {$t_{a_3}$};
+	\node (time_0) at (-4,-6) {$0$};
+	\node[hypotheticalChild] (start) at (-3,0) {};
+	\node[extantChild] (birth_a1) at (-2,-2) {};
+	\node[extantChild] (birth_a2) at (-2,-3) {};
+	\node[extantChild] (birth_a3) at (-2,-4) {};
+	\node (archetype) at (-2,-6) {$\times$};
+	\node (a1) at (1,-6) {$a_1$};
+	\node (a2) at (0,-6) {$a_2$};
+	\node (a3) at (-1,-6) {$a_3$};
+	\draw[undirected] (start) -| (birth_a1) -- (birth_a2) -- (birth_a3);
+	\draw[undirected] (birth_a1) -| (a1);
+	\draw[undirected] (birth_a2) -| (a2);
+	\draw[undirected] (birth_a3) -| (a3);
+	\draw[dashed] (birth_a3.south) -| (archetype);
+	\draw[dashed] (time_archetype) -- (time_a1) -- (time_a2) -- (time_a3) -- (time_0);
+\end{tikzpicture}
+\end{document}

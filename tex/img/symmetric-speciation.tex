@@ -1,0 +1,14 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node (ancestor) at (0,3) {Ancestor};
+	\node (descendant_1) at (-1,-3) {Descendant};
+	\node (descendant_2) at (1,-3) {Descendant};
+	\node[extantChild] (birth) at (0,0) {};
+	\draw[undirected] (ancestor) -- (birth);
+	\draw[undirected] (birth) -| (descendant_1);
+	\draw[undirected] (birth) -| (descendant_2);
+\end{tikzpicture}
+\end{document}

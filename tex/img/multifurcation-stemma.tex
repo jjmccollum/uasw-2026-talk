@@ -1,0 +1,20 @@
+\documentclass[tikz]{standalone}
+\usepackage{../sty/phylogenetic-diagrams} % Include the style file containing the code defining the structure and style of the document
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm]
+	\node (time_archetype) at (-3,0) {$t_{\alpha}$};
+	\node (time_a1) at (-3,-2) {$t_{a_1}$};
+	\node (time_a2) at (-3,-3) {$t_{a_2}$};
+	\node (time_a3) at (-3,-4) {$t_{a_3}$};
+	\node (time_0) at (-3,-6) {$0$};
+	\node[hypotheticalWit] (archetype) at (0,0) {$\alpha$};
+	\node[extantWit] (a1) at (-2,-2) {$a_1$};
+	\node[extantWit] (a2) at (0,-3) {$a_2$};
+	\node[extantWit] (a3) at (2,-4) {$a_3$};
+	\draw[undirected] (archetype) -| (a1);
+	\draw[undirected] (archetype.south) -| (a2);
+	\draw[undirected] (archetype) -| (a3);
+	\draw[dashed] (time_archetype) -- (time_a1) -- (time_a2) -- (time_a3) -- (time_0);
+\end{tikzpicture}
+\end{document}

@@ -75,11 +75,13 @@
 	\titlepage
 \end{frame}
 
+\begin{frame}[KUL-header]
+    \frametitle{Our Story Starts}
+\end{frame}
+
 \begin{frame}[KUL-standard]
         \begin{columns}[T]
         	\begin{column}{0.4\textwidth}
-        		{\color{KUL-BLUE}\LARGE{Our Story Starts}}\par
-        		\vspace{0.6\baselineskip}
 			\begin{itemize}
 				\item Early parsimony-based approaches for inferring trees of life were (and still are) popular for reconstructing the transmission histories of written works
 				\item Based on a straightforward analogy:
@@ -183,7 +185,7 @@
 			\centering
 			\includegraphics[width=0.7\textwidth]{../img/weitzman-greek-birth-death-rates.png}\par
 			\footnotesize
-			Source: Michael P. Weitzman, \textquote{The Evolution of Manuscript Traditions}, \emph{Journal of the Royal Statistical Society} A.150/4 (1987): 287–308
+			Source: Michael P. Weitzman, \textquote{The Evolution of Manuscript Traditions}, \emph{Journal of the Royal Statistical Society} A/150.4 (1987): 287–308
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -294,7 +296,7 @@
 					\item High agreement among the majority of later witnesses $\Rightarrow$ bias towards careful copying 
 				\end{itemize}
 				\item Tree height constrained by the work's composition date + long branches leading to early witnesses to account for their lower levels of agreement $\Rightarrow$ branches closer to the origin become increasingly shorter $\Rightarrow$ virtually no expected changes at the earliest part of the tradition!
-				\item \textbf{Lesson}: \emph{calibrating the clock is crucial!}
+				\item \textbf{Lesson}: \emph{a carefully calibrated clock is crucial!}
 		        \end{itemize}
 		\end{column}
 		\begin{column}{0.175\textwidth}
@@ -331,6 +333,176 @@
         	\item Adding such features to the collation could inform inferences about when and where contamination took place
         	\item Moving from a stemma of \textquote{dated sequences of readings} to something closer to a stemma of physical manuscripts
 		\item \textbf{Lesson}: \emph{encode extratextual evidence!}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-header]
+    \frametitle{Model Modifications for Maerlant's \emph{Martijn}}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	A collaboration with Sofie Moors (Moors and McCollum 2025) provided an opportunity to adapt these models further and apply them to Jacob van Maerlant's \emph{Martijn Trilogy}
+        \begin{itemize}
+        	\item More recent composition (13th c.)
+        	\item Relatively few known witnesses ($18$), several of which are fragmentary
+	\end{itemize}
+	\begin{columns}[T]
+		\begin{column}{0.55\textwidth}
+			\includegraphics[width=\textwidth]{../img/martijn-trilogy-densitree.pdf}
+			\footnotesize Source: Sofie Moors and Joey McCollum, \textquote{From a Computer-Assisted Stemma to a Phylogenetic Tree: The Medieval Dutch \emph{Martijn Trilogy} by Jacob van Maerlant}, \emph{Anthology of Computers and the Humanities} 3 (2025): 189–210
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\includegraphics[width=\textwidth]{../img/moors-defense-group-photo.jpg}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+      	We did not have time to make philological judgments across $434$ variation units, so we took some practical shortcuts:
+	\begin{itemize}
+		\item For prior probabilities of readings at the origin, we tested two configurations:
+		\begin{enumerate}
+			\item non-uniform priors informed by the edition of Verdam and Leendertz (1918); and 
+			\item uniform priors
+		\end{enumerate}
+		\item For a substitution model, we used the Lewis Mk model, which is time-reversible and assumes that all transitions between states are equally likely
+	\end{itemize}
+	\begin{center}
+		\includegraphics[scale=1]{../img/lewis-mk-example.pdf}
+	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	To account for the possibility that scribal activity was more frequent in some variation units than in others, we used non-homogeneous \emph{site mutation rates} at all variation units
+	\begin{itemize}
+		\item The only constraint is that these rates must have a mean of $1$ (to conserve the expected number of changes given by the branch rate model)
+		\item Start by setting all rates to $1$, then sample different values, maintaining balance by decreasing another site's rate whenever we increase one site's rate (and vice-versa)
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{../img/site-mutation-rates.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	To constrain branch rates to more realistic values, we used an \emph{epoch-based clock model}
+       	\begin{columns}[T]
+        	\begin{column}{0.4\textwidth}
+			\begin{itemize}
+				\item For epoch $i$, the base rate of $s$ expected changes per variation unit per copying event is scaled by $\lambda_i$, the expected number of copying events per year along a given branch in that epoch
+				\item \textbf{Intuition}: scribal changes are mediated at copying events, so the branch rate should be coupled with the birth-death process assumed for the tree prior
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.55\textwidth}
+			\includegraphics[width=\textwidth]{../img/epoch-clock-model.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	Contamination and paratextual evidence were only addressed minimally, if at all
+	\begin{itemize}
+		\item Unclear how prevalent contamination would be compared to traditions like the New Testament
+		\item Existing Bayesian models of contamination might overestimate contamination events along branches leading to more fragmentary witnesses
+		\item The tradition of the \emph{Martijn Trilogy} does not feature the kinds of paratexts we find in the New Testament tradition
+		\item But we did model the physical production style of manuscripts as a paratextual variation unit (under the intution that scribes would frequently replicate the format of their exemplar).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	This configuration fixed the previous problem of branch rates being too low (and thus yielded more variance in the posterior probabilities of readings at the origin), but we observed one lingering issue in particular:
+       	\begin{itemize}
+       		\item The base rate of scribal change $s$ was estimated to be much higher than expected, with a mean of $0.25$ expected changes/variation unit/copying event!
+       		\item Suspected cause: we did not account for the fact that every node in the tree represents a copying event (for an extant or reconstructed witness) at which additional scribal changes could be introduced
+       		\item \textbf{Lesson}: \emph{the coupled clock was close, but changes aren't continuous; they're concentrated at copies}
+       	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-header]
+    \frametitle{Recent Realizations and Intended Improvements}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	An instructive first step is to shift our perspective from the \emph{stemma codicum} (a graph of ancestor-descendant relationships) to a tree of lineages (manuscripts) over time
+       	\begin{itemize}
+       		\item The stemma obscures the fact that extant witnesses survived to the present (and could continue to be used as sources for corrections and additional copies)
+       		\item It gives the (false) impression of multifurcation when bifurcation is more accurate
+       		\item It suggests that speciation is symmetric when in fact it is not 
+       	\end{itemize}
+       	\begin{columns}[T]
+       		\begin{column}{0.3\textwidth}
+       			\centering
+       			\includegraphics[scale=0.6667]{../img/multifurcation-stemma.pdf}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+       			\centering
+       			\includegraphics[scale=0.6667]{../img/multifurcation-birth-death-tree.pdf}
+		\end{column}
+		\begin{column}{0.225\textwidth}
+       			\centering
+       			\includegraphics[scale=0.6667]{../img/symmetric-speciation.pdf}
+		\end{column}
+		\begin{column}{0.225\textwidth}
+       			\centering
+       			\includegraphics[scale=0.6667]{../img/asymmetric-speciation.pdf}
+		\end{column}
+       	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	To reframe earlier lessons from this perspective:
+       	\begin{itemize}
+       		\item Manuscripts, unlike cells and populations, \textquote{speciate} by budding rather than subdividing
+       		\item Outside of corrections (which can be modeled by a different mechanism), manuscripts do not evolve as they sit on the shelf; textual mutation happens in \textquote{spikes} at copying events
+       		\item Textual changes introduced at a copying event only propagate along the descendant branch
+       	\end{itemize}
+       	\begin{center}
+       		\includegraphics[width=0.6667\textwidth]{../img/speciation-mode-spikes.png}
+       		\par
+       		\footnotesize Source: Jordan Douglas et al., \textquote{Evolution is coupled with branching across many granularities of life}, \emph{Proceedings of the Royal Society} B/292.2047 (2025): art. 20250182
+       	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	Recent Bayesian phylogenetic models for punctuated evolution at speciation events (Douglas et al. 2025; Dieselhorst and Berg 2026) are a promising fit for our use case
+       	\begin{itemize}
+       		\item Expected scribal changes per variation unit along branch $b$ is $r_b t_b + s_b$, where $r_b$ is its rate of continuous evolution, $t_b$ is its duration in time, and $s_b$ is a \emph{spike size} (measured in changes per variation unit) assigned to the branch
+       		\item The spike size $s_b$ is assumed to be distributed according to a sum of Poisson or gamma random variables, one for each \textquote{stub} (hidden birth event) along branch $b$ and one for the known birth event that gave rise to the branch
+	\end{itemize}
+	\begin{center}
+       		\includegraphics[scale=0.3333]{../img/full-tree-spikes.png}
+       		\hspace{1em}
+       		\raisebox{10mm}{\LARGE$\Rightarrow$}
+       		\hspace{1em}
+       		\includegraphics[scale=0.3333]{../img/reconstructed-tree-spikes.png}
+       		\par
+       		\footnotesize Source: Jordan Douglas et al., \textquote{Evolution is coupled with branching across many granularities of life}, \emph{Proceedings of the Royal Society} B/292.2047 (2025): art. 20250182
+       	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	We don't know the number $i$ of stubs along a branch, so we marginalize over it based on an assumed birth-death process:
+	\begin{center}
+       		\includegraphics[scale=1.0]{../img/spike-probability.pdf}
+	\end{center}
+	\begin{itemize}
+		\item We factor in $\Pr(b\text{ observed})$ from the birth-death tree prior
+		\item We cut off the sum when the terms become sufficiently small (a short time in practice)
+	\end{itemize}
+	\vspace{\baselineskip}
+	For our use case, this model can be slightly adapted, and in some cases simplified:
+       	\begin{itemize}
+		\item We assume no continuous evolution, so branches are only parameterized by $s_b$
+		\item If $b$ is an ancestor branch rather than a descendant branch, the sum starts at $i = 0$
+		\item More generally, we marginalize only over birth events in which $b$ follows the descendant lineage (as these are the only ones along which textual changes are introduced)
+       	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	Branch spike models have a number of advantages:
+	\begin{itemize}
+		\item They couple the branching process of the tree with the mutation process along its branches in a way that properly accounts for changes at hypothesized copying events, and they model the contributions of individual scribes as Poisson- or gamma-distributed random variables; thus, they allow a more robust estimate of scribal fidelity than previous approaches
+		\item Unlike birth-death process tree priors in isolation, birth-death process tree priors coupled with a branch spike model are \emph{fully identifiable}, which means we can estimate their birth, death, and sampling rates at the same time (Dieselhorst and Stadler 2026)
+		\item Using the existing \texttt{BDMM-Prime} (Vaughan and Stadler 2025) and \texttt{MultiTypeSpikeModel} (Ciuffi et al., forthcoming) BEAST 2 packages, we can even model the transmission process with different types of manuscripts, where each type has its own copying rates, loss rates, and spike distributions (i.e., fidelity in copying)!
 	\end{itemize}
 \end{frame}
 
