@@ -385,7 +385,7 @@
 
 \begin{frame}[KUL-standard]
        	To constrain branch rates to more realistic values, we used an \emph{epoch-based clock model}
-       	\begin{columns}[T]
+       	\begin{columns}[c]
         	\begin{column}{0.4\textwidth}
 			\begin{itemize}
 				\item For epoch $i$, the base rate of $s$ expected changes per variation unit per copying event is scaled by $\lambda_i$, the expected number of copying events per year along a given branch in that epoch
@@ -482,28 +482,85 @@
 \begin{frame}[KUL-standard]
 	We don't know the number $i$ of stubs along a branch, so we marginalize over it based on an assumed birth-death process:
 	\begin{center}
-       		\includegraphics[scale=1.0]{../img/spike-probability.pdf}
+       		\includegraphics[scale=1.25]{../img/spike-probability.pdf}
 	\end{center}
 	\begin{itemize}
 		\item We factor in $\Pr(b\text{ observed})$ from the birth-death tree prior
 		\item We cut off the sum when the terms become sufficiently small (a short time in practice)
 	\end{itemize}
-	\vspace{\baselineskip}
-	For our use case, this model can be slightly adapted, and in some cases simplified:
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	For our use case, this model can be slightly adapted, and in some cases simplified:
        	\begin{itemize}
 		\item We assume no continuous evolution, so branches are only parameterized by $s_b$
 		\item If $b$ is an ancestor branch rather than a descendant branch, the sum starts at $i = 0$
 		\item More generally, we marginalize only over birth events in which $b$ follows the descendant lineage (as these are the only ones along which textual changes are introduced)
-       	\end{itemize}
+	\end{itemize}
+	\begin{columns}[T]
+		\begin{column}{0.4525\textwidth}
+			\begin{itemize}
+				\item In the case of an extant witness, we know that $i = 0$ (no intermediate copying events) along its lineage between its birth date and the present; we can encode this constraint with a \emph{stratigraphic range}
+				\begin{itemize}
+					\item This feature and ancestor- and descendant-oriented tree topologies are already implemented in the \texttt{stratigraphic-ranges} BEAST 2 package (Stadler et al. 2018; Stolz et al. 2025)
+				\end{itemize}
+       			\end{itemize}
+		\end{column}
+		\begin{column}{0.475\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../img/stratigraphic-ranges.jpg}
+	       		\par
+	       		\footnotesize Source: Tanja Stadler et al., \textquote{The fossilized birth-death model for the analysis of stratigraphic range data under different speciation modes}, \emph{Journal of Theoretical Biology} 447 (2018): 41–55
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[KUL-standard]
 	Branch spike models have a number of advantages:
 	\begin{itemize}
-		\item They couple the branching process of the tree with the mutation process along its branches in a way that properly accounts for changes at hypothesized copying events, and they model the contributions of individual scribes as Poisson- or gamma-distributed random variables; thus, they allow a more robust estimate of scribal fidelity than previous approaches
+		\item They couple the branching process of the tree with the mutation process along its branches in a way that properly accounts for changes at hypothesized copying events, and they explicitly model variations in the fidelity of individual scribes and their cumulative effect along a branch
 		\item Unlike birth-death process tree priors in isolation, birth-death process tree priors coupled with a branch spike model are \emph{fully identifiable}, which means we can estimate their birth, death, and sampling rates at the same time (Dieselhorst and Stadler 2026)
-		\item Using the existing \texttt{BDMM-Prime} (Vaughan and Stadler 2025) and \texttt{MultiTypeSpikeModel} (Ciuffi et al., forthcoming) BEAST 2 packages, we can even model the transmission process with different types of manuscripts, where each type has its own copying rates, loss rates, and spike distributions (i.e., fidelity in copying)!
+		\item Using the existing \texttt{BDMM-Prime} (Vaughan and Stadler 2025) and \texttt{MultiTypeSpikeModel} (Ciuffi et al., forthcoming) BEAST 2 packages, we can even model the transmission process with different types of manuscripts (e.g., deluxe manuscripts vs. booklets; see Godreau et al. 2025), where each type has its own copying rates, loss rates, and distributions of scribal fidelity rates!
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	To account for contamination, we can use the \texttt{contacTrees} BEAST 2 package (Neureiter et al. 2022), originally developed for linguistics
+       	\begin{columns}[T]
+       		\begin{column}{0.65\textwidth}
+		       	\begin{itemize}
+		       		\item At a given time, a contact event between two active lineages can occur at a specified (potentially epoch-dependent) rate
+		       		\item The destination lineage borrows readings in a subset of variation units along the contact edge and inherits all other readings from its ancestor as usual
+		       		\item This nicely models correction of a copy against a different exemplar, which is a process distinct from copying and can occur anytime after the copying of a manuscript
+		       		\item \textbf{Limitation}: cannot model \emph{extra-stemmatic contamination} (though this can be attempted through the addition of \textquote{dummy} witnesses)
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\centering
+	       		\includegraphics[width=\textwidth]{../img/contacTrees-linguistics-example.png}
+	       		\par
+	       		\footnotesize Source: Nico Neureiter et al., \textquote{Detecting contact in language trees: a Bayesian phylogenetic model with horizontal transfer}, \emph{Humanities and Social Sciences Communications} 9 (2022): art. 205
+		\end{column}
+       	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+       	In the New Testament tradition, we can incorporate paratextual evidence like the Euthalian apparatus and patristic commentaries to ground our reconstruction of transmission history in manuscripts' physical features as well as their texts
+       	\begin{columns}[b]
+       		\begin{column}{0.4\textwidth}
+		       	\begin{itemize}
+		       		\item \emph{Dollo features}: secondary features that emerge once, can be lost multiple times independently, and cannot re-emerge
+		       		\item Originated within the manuscript tradition, so they imply a genealogical relationship (by direct inheritance or contamination) between the manuscripts that share them
+		       		\item Comprehensively documented in recent publications
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.55\textwidth}
+			\centering
+	       		\includegraphics[height=2.125in]{../img/euthalian-tradition-cover.pdf}
+	       		\hspace{0.5em}
+	       		\includegraphics[height=2.125in]{../img/catena-manuscripts-cover.png}
+		\end{column}
+       	\end{columns}
 \end{frame}
 
 \end{document}
