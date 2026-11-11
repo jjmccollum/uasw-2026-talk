@@ -11,16 +11,22 @@
 \begin{document}
 \begin{tikzpicture}
 	% Time axis:
+	\node (time_origin) at (-2,4) {$t_{\Omega}$};
 	\node (time_epoch_2) at (-2,2) {$t_{\text{upper}}$};
 	\node (time_epoch_1) at (-2,1) {$t_{\text{lower}}$};
 	% Nodes
-	\draw (0, 1) node[minimum size=0pt,inner sep=0pt, outer sep=0pt] (epoch_boundary) {};
+	\node (origin_state) at (0,4) {$[1.0, 0.0]$};
+	\draw (0, 2) node[minimum size=0pt,inner sep=0pt, outer sep=0pt] (epoch_boundary_2) {};
+	\draw (0, 1) node[minimum size=0pt,inner sep=0pt, outer sep=0pt] (epoch_boundary_1) {};
 	% Edges
-	\draw[line width=1pt, dashed] (time_epoch_2) -- (time_epoch_1) -- (-2,-4);
-	\draw [line width=3pt, red!75!black] (0, 2)  -- (epoch_boundary);
-	\draw [line width=3pt, green!50!black] (epoch_boundary) -- (0, -4);
+	\draw[line width=1pt, dashed] (time_origin) -- (time_epoch_2) -- (time_epoch_1) -- (-2,-4);
+	\draw [line width=3pt, white!50!black] (origin_state)  -- (epoch_boundary_2);
+	\draw [line width=3pt, red!75!black] (epoch_boundary_2)  -- (epoch_boundary_1);
+	\draw [line width=3pt, green!50!black] (epoch_boundary_1) -- (0, -4);
 	% Labels
-	\draw [decorate,decoration={brace,amplitude=10pt}] (2,1.9) -- (2,1.1) node [midway, xshift=1.25in, text width=2in, align=left] {$\mathbf{Q} = \begin{bmatrix} -\varepsilon & \varepsilon\\ 1& -1\end{bmatrix},\ \varepsilon \ll 1$};
-	\draw [decorate,decoration={brace,amplitude=10pt}] (2,0.9) -- (2,-3.9) node [midway, xshift=1.25in, text width=2in, align=left] {$\mathbf{Q} = \begin{bmatrix} 0 & 0\\ 1& -1\end{bmatrix}$};
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,4.3) -- (2,3.7) node [midway, xshift=1.25in, text width=2in, align=left] {Feature absent at origin};
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,3.5) -- (2,2.1) node [midway, xshift=1.25in, text width=2in, align=left] {$r = 0$ (no change)};
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,1.9) -- (2,1.1) node [midway, xshift=1.25in, text width=2in, align=left] {$\mathbf{Q} = \begin{bmatrix} -1 & 1 \\ 0 & 0 \end{bmatrix},\ r\text{ extremely small}$\\Feature arises in this date range\\(only once, with high probability)};
+	\draw [decorate,decoration={brace,amplitude=10pt}] (2,0.9) -- (2,-3.9) node [midway, xshift=1.25in, text width=2in, align=left] {$\mathbf{Q} = \begin{bmatrix} 0 & 0\\ 1 & -1 \end{bmatrix},\ r\text{ moderate}$\\Feature cannot arise anymore;\\preserved in some branches\\and lost in others};
 \end{tikzpicture}
 \end{document}

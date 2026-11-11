@@ -530,7 +530,7 @@
        		\begin{column}{0.65\textwidth}
 		       	\begin{itemize}
 		       		\item At a given time, a contact event between two active lineages can occur at a specified (potentially epoch-dependent) rate
-		       		\item The destination lineage borrows readings in a subset of variation units along the contact edge and inherits all other readings from its ancestor as usual
+		       		\item The destination lineage borrows readings in a subset of variation units along the contact edge and inherits all other readings from its usual ancestor
 		       		\item This nicely models correction of a copy against a different exemplar, which is a process distinct from copying and can occur anytime after the copying of a manuscript
 		       		\item \textbf{Limitation}: cannot model \emph{extra-stemmatic contamination} (though this can be attempted through the addition of \textquote{dummy} witnesses)
 			\end{itemize}
@@ -561,6 +561,47 @@
 	       		\includegraphics[height=2.125in]{../img/catena-manuscripts-cover.png}
 		\end{column}
        	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	In many cases, we have a tight date range for when such a feature originated, so we can model its initial absence, one-time emergence, and occasional subsequent loss using a combination of the epoch substitution models and epoch clock models described earlier
+	\begin{columns}[T]
+        	\begin{column}{0.45\textwidth}
+			\begin{itemize}
+				\item By assigning a very low branch rate for the feature's emergence, we penalize multiple emergence
+				\item After the date range of its origin, the feature can be lost, and it can only be reinherited by contamination
+				\item Incentivizes the addition of contact edges that resolve incompatible splits over these features
+				\item This model can also be used for monogenetic variant readings (if they are known to be secondary)
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{../img/epoch-dollo-model.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	I am currently in the process of implementing these features in a unified BEAST 3 package
+	\begin{itemize}
+		\item Most of the ingredients are already present in existing packages
+		\item They just need to be brought together with some minor adaptations
+		\item Once implemented, the model described here will be used in the standard template for BEAST 3 inputs generated from TEI collations using the \texttt{teiphy} Python package
+	\end{itemize}
+	\begin{center}
+       		\includegraphics[width=0.75\textwidth]{../img/teiphy-logo.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}[KUL-standard]
+	\vspace{2\baselineskip}
+	\begin{center}
+		\LARGE 
+		That's it!\par
+		\vspace{\baselineskip}
+		Thoughts?\par
+		\vspace{\baselineskip}
+		(Thanks!)
+	\end{center}
 \end{frame}
 
 \end{document}
