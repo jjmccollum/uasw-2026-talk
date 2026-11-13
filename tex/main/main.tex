@@ -87,8 +87,8 @@
 				\item Based on a straightforward analogy:
 				\begin{itemize}
 					\item manuscripts = taxa
-					\item sites/characters = variation units
-					\item states = variant readings
+					\item variation units = sites/characters
+					\item variant readings = states
 				\end{itemize}
 				\item Little adaptation needed beyond allowing for variable numbers of states at different sites
 			\end{itemize}
@@ -104,9 +104,9 @@
 \begin{frame}[KUL-standard]
 	Parsimony-based approaches get their efficiency from simplifying assumptions standard in biology
         \begin{itemize}
-     		\item The states, time, and placement of the root of the tree are unknown
+     		\item The states, date, and placement of the root of the tree are unknown
 		\item Changes are \emph{time-reversible} (same cost regardless of the direction in which they occur)
-		\item Find the lowest-cost unrooted tree, then choose the placement of the root
+		\item Find the lowest-cost unrooted tree, then choose the placement of the root (Froger 1968)
         \end{itemize}
 	\begin{center}
 		\raisebox{2.75mm}{\includegraphics[scale=0.5]{../img/stemma-unrooted.pdf}}
@@ -124,8 +124,8 @@
 \begin{frame}[KUL-standard]
 	But in text-critical applications, these assumptions prevent parsimony-based approaches from leveraging valuable evidence in their evaluation of candidate tree topologies
 	\begin{itemize}
-		\item \emph{Intrinsic probabilities} for states at the origin, describing our priors about which readings are most likely authorial (based on philological judgments)
-		\item \emph{Transcriptional probabilities} for transitions between readings, especially in cases where changes are more likely in one direction than in the other
+		\item \emph{Intrinsic probabilities} for states at the top of the tree, describing our priors about which readings are most likely authorial (based on philological judgments)
+		\item \emph{Transcriptional probabilities} for transitions along the branches, especially in cases where changes are more likely in one direction than in the other
 		\item Dated features (e.g., paratexts) and time-specific influences on transmission
 	\end{itemize}
 	\vspace{\baselineskip}
@@ -145,7 +145,7 @@
 				\includegraphics[scale=1.25]{../img/bayes-rule.pdf}
 			\end{center}
 			\begin{itemize}
-		        		\item Accommodates our priors (in varying degrees of certainty) and measures the certainty of the results
+		        		\item Accommodates our (uncertain) priors and measures the certainty of the results
 		        \end{itemize}
 		\end{column}
 		\begin{column}{0.35\textwidth}
