@@ -3,6 +3,6 @@
 
 \begin{document}
 \begin{tikzpicture}
-	\node (equation) at (0,0) {$\begin{aligned}\Pr(s_b) = \sum_{i = 1}^{\infty} {\color{blue}\overbrace{\color{black}\Pr(s_b \mid i\text{ birth events along }b)}^{\strut\text{Poisson- or gamma-distributed}}} \times {\color{red}\overbrace{\color{black}\Pr(i\text{ birth events along }b \mid b\text{ observed})}^{\strut\text{Poisson-distributed}}}\end{aligned}$};
+	\node (equation) at (0,0) {$\begin{aligned}\Pr(s_b) = \sum_{i = 1}^{\infty} {\color{blue}\overbrace{\color{black}\Pr(s_b \mid i\text{ births})}^{\strut\text{Poisson- or gamma-distributed}}} \times \lambda \times {\color{red}\overbrace{\color{black}\Pr(i-1\text{ hidden births} \mid b\text{ observed})}^{\strut\text{Poisson-distributed}}}\end{aligned}$};
 \end{tikzpicture}
 \end{document}

@@ -510,13 +510,13 @@
        	For our use case, this model can be slightly adapted, and in some cases simplified:
        	\begin{itemize}
 		\item We assume no continuous evolution, so branches are only parameterized by $s_b$
-		\item If $b$ is an ancestor branch rather than a descendant branch, the sum starts at $i = 0$
+		\item If $b$ is an ancestor branch, we don't count the birth event at the top of the branch
 		\item More generally, we marginalize only over birth events in which $b$ follows the descendant lineage (as these are the only ones along which textual changes are introduced)
 	\end{itemize}
 	\begin{columns}[T]
 		\begin{column}{0.4525\textwidth}
 			\begin{itemize}
-				\item In the case of an extant witness, we know that $i = 0$ (no intermediate copying events) along its lineage between its birth date and the present; we can encode this constraint with a \emph{stratigraphic range}
+				\item In the case of an extant witness, we know that there are no intermediate copying events along its lineage between its copying date and the present; we can encode this constraint with a \emph{stratigraphic range}
 				\begin{itemize}
 					\item This feature and ancestor- and descendant-oriented tree topologies are already implemented in the \texttt{stratigraphic-ranges} BEAST package (Stadler et al. 2018; Stolz et al. 2025)
 				\end{itemize}
@@ -547,7 +547,7 @@
 		       	\begin{itemize}
 		       		\item At a given time, a contact event between two active lineages can occur at a specified (potentially epoch-dependent) rate
 		       		\item The destination lineage borrows readings in a subset of variation units along the contact edge and inherits all other readings from its usual ancestor
-		       		\item This nicely models correction of a copy against a different exemplar, which is a process distinct from copying and can occur anytime after the copying of a manuscript
+		       		\item This nicely models correction of a copy against a different exemplar, which is a process distinct from copying
 		       		\item \textbf{Limitation}: cannot model \emph{extra-stemmatic contamination} (though this can be attempted through the addition of \textquote{dummy} witnesses)
 			\end{itemize}
 		\end{column}
