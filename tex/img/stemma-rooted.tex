@@ -3,7 +3,6 @@
 
 \begin{document}
 \begin{tikzpicture}[node distance=2.5cm]
-	\node[hypotheticalWit] (origin) at (0,2) {\textgreek{Ω}};
 	\node[hypotheticalWit] (archetype) at (0,0) {\textgreek{ω}};
 	\node[hypotheticalWit] (alpha) at (-4,-2) {\textgreek{α}};
 	\node[hypotheticalWit] (beta) at (4,-2) {\textgreek{β}};
@@ -13,7 +12,6 @@
 	\node[extantWit] (b2) at (6,-4) {b\textsubscript{2}};
 	\node[extantWit] (c1) at (-3,-6) {c\textsubscript{1}};
 	\node[extantWit] (c2) at (-1,-6) {c\textsubscript{2}};
-	\draw (origin) edge[directed] (archetype);
 	\draw (archetype) edge[directed] (alpha);
 	\draw (archetype) edge[directed] (beta);
 	\draw (alpha) edge[directed] (a);

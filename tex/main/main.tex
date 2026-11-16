@@ -48,6 +48,20 @@
 	ItalicFont=*-Regular,
 	BoldFont=*-Bold
 ] % if you want a separate font for Latin text
+\newfontfamily\fafont{Font Awesome 6 Free-Regular-400}[
+	Path=../fonts/,
+	Extension=.otf,
+	UprightFont=*
+]
+\newfontfamily\fabrandsfont{Font Awesome 6 Brands-Regular-400}[
+	Path=../fonts/,
+	Extension=.otf,
+	UprightFont=*
+]
+
+\usepackage{xcolor}
+\definecolor{bluesky}{HTML}{1185FE}
+\definecolor{orcid}{HTML}{A6CE39}
 
 \hyphenation{}
 
@@ -207,7 +221,7 @@
 	\begin{columns}[T]
         	\begin{column}{0.45\textwidth}
 			\begin{itemize}
-				\item To account for variations in copyinbg fidelity among different scribes, I used an \emph{uncorrelated relaxed clock model}
+				\item To account for variations in copying fidelity among different scribes, I used an \emph{uncorrelated relaxed clock model}
 				\begin{itemize}
 					\item Expected changes/site/year along different branches assumed to be independently and identically distributed according to a log-normal distribution
 					\item Mean and standard deviation of the distribution estimated in the analysis
@@ -230,7 +244,7 @@
 		\begin{itemize}
 			\item E.g., confusions of similar sounds, visual errors (like haplography), semantic changes
 		\end{itemize}
-		\item Used in custom (potentially non-time-reversible) substitution models
+		\item Used in custom (typically asymmetric) substitution models
 	\end{itemize}
 	\begin{center}
 		\includegraphics[scale=1]{../img/substitution-model-example.pdf}
@@ -248,11 +262,11 @@
 	\begin{columns}[T]
         	\begin{column}{0.4\textwidth}
 			\begin{itemize}
-				\item \emph{Epoch-based substitution models} that can account for time-dependent transcriptional factors
+				\item \emph{Epoch-based substitution models} (from the \texttt{BEASTLabs} BEAST package) that can account for time-dependent transcriptional factors
 				\begin{itemize}
-					\item Assimilation to the popular text of the Byzantine period
 					\item Linguistic forces operative in post-classical or medieval Greek
 					\item Visual confusions only possible in majuscule or minuscule script
+					\item Assimilation to the popular text of the Byzantine period
 				\end{itemize}
 			\end{itemize}
 		\end{column}
@@ -287,9 +301,9 @@
         	\begin{column}{0.775\textwidth}
 			\textbf{...though some issues stood out}
 		        \begin{itemize}
-		        	\item Posterior probabilities of readings at the origin seemed a bit \emph{too} confident ($98$ to $100\%$)
+		        	\item Posterior probability of the best-attested reading's originality seemed a bit \emph{too} confident ($98$ to $100\%$)
 		        	\begin{itemize}
-		        		\item Even in cases where the prior probability assigned to one reading was $100$ times higher than those assigned to other readings!
+		        		\item Even in cases where its prior probability was $100$ times lower than that of another reading!
 				\end{itemize}
 				\item Likely cause: low estimated branch rates (with a mean of $0.000102$ to $0.000119$ changes/variation unit/year in $95\%$ of the samples)
 				\begin{itemize}
@@ -360,12 +374,12 @@
 \begin{frame}[KUL-standard]
       	We did not have time to make philological judgments across $434$ variation units, so we took some practical shortcuts:
 	\begin{itemize}
-		\item For prior probabilities of readings at the origin, we tested two configurations:
+		\item For priors on root frequencies of readings, we tested two configurations:
 		\begin{enumerate}
 			\item non-uniform priors informed by the edition of Verdam and Leendertz (1918); and 
 			\item uniform priors
 		\end{enumerate}
-		\item For a substitution model, we used the Lewis Mk model, which is time-reversible and assumes that all transitions between states are equally likely
+		\item For a substitution model, we used the Lewis Mk model, which is symmetric and time-reversible and assumes that all transitions between states are equally likely
 	\end{itemize}
 	\begin{center}
 		\includegraphics[scale=1]{../img/lewis-mk-example.pdf}
@@ -376,7 +390,7 @@
        	To account for the possibility that scribal activity was more frequent in some variation units than in others, we used non-homogeneous \emph{site mutation rates} at all variation units
 	\begin{itemize}
 		\item The only constraint is that these rates must have a mean of $1$ (to conserve the expected number of changes given by the branch rate model)
-		\item Start by setting all rates to $1$, then sample different values, maintaining balance by decreasing another site's rate whenever we increase one site's rate (and vice-versa)
+		\item Start by setting all rates to $1$, then sample different values, maintaining balance by decreasing one site's rate whenever we increase another's rate (and vice-versa)
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{../img/site-mutation-rates.png}
@@ -384,7 +398,7 @@
 \end{frame}
 
 \begin{frame}[KUL-standard]
-       	To constrain branch rates to more realistic values, we used an \emph{epoch-based clock model}
+       	To constrain branch rates to more realistic values, we used an \emph{epoch-based clock model} (from the \texttt{EpochClockModel} BEAST package)
        	\begin{columns}[c]
         	\begin{column}{0.4\textwidth}
 			\begin{itemize}
@@ -401,20 +415,22 @@
 \begin{frame}[KUL-standard]
        	Contamination and paratextual evidence were only addressed minimally, if at all
 	\begin{itemize}
-		\item Unclear how prevalent contamination would be compared to traditions like the New Testament
-		\item Existing Bayesian models of contamination might overestimate contamination events along branches leading to more fragmentary witnesses
+		\item Existing Bayesian models of lateral transfer might overestimate contamination events along branches leading to more fragmentary witnesses
 		\item The tradition of the \emph{Martijn Trilogy} does not feature the kinds of paratexts we find in the New Testament tradition
 		\item But we did model the physical production style of manuscripts as a paratextual variation unit (under the intution that scribes would frequently replicate the format of their exemplar).
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[KUL-standard]
-       	This configuration fixed the previous problem of branch rates being too low (and thus yielded more variance in the posterior probabilities of readings at the origin), but we observed one lingering issue in particular:
+       	This configuration fixed the previous problem of branch rates being too low (and thus yielded more variance in the posterior probabilities of which readings were original), but we observed one lingering issue in particular:
        	\begin{itemize}
        		\item The base rate of scribal change $s$ was estimated to be much higher than expected, with a mean of $0.25$ expected changes/variation unit/copying event!
-       		\item Suspected cause: we did not account for the fact that every node in the tree represents a copying event (for an extant or reconstructed witness) at which additional scribal changes could be introduced
-       		\item \textbf{Lesson}: \emph{the coupled clock was close, but changes aren't continuous; they're concentrated at copies}
+       		\item Suspected cause: we did not account for the fact that every node in the tree represents a copying event at which additional scribal changes could be introduced
+       		\item \textbf{Lesson}: \emph{the coupled clock was close, but changes aren't continuous; they cluster at copies!}
        	\end{itemize}
+       	\begin{center}
+		\includegraphics[width=0.5\textwidth]{../img/martijn-trilogy-mcc-tree.pdf}
+	\end{center}
 \end{frame}
 
 \begin{frame}[KUL-header]
@@ -502,7 +518,7 @@
 			\begin{itemize}
 				\item In the case of an extant witness, we know that $i = 0$ (no intermediate copying events) along its lineage between its birth date and the present; we can encode this constraint with a \emph{stratigraphic range}
 				\begin{itemize}
-					\item This feature and ancestor- and descendant-oriented tree topologies are already implemented in the \texttt{stratigraphic-ranges} BEAST 2 package (Stadler et al. 2018; Stolz et al. 2025)
+					\item This feature and ancestor- and descendant-oriented tree topologies are already implemented in the \texttt{stratigraphic-ranges} BEAST package (Stadler et al. 2018; Stolz et al. 2025)
 				\end{itemize}
        			\end{itemize}
 		\end{column}
@@ -520,12 +536,12 @@
 	\begin{itemize}
 		\item They couple the branching process of the tree with the mutation process along its branches in a way that properly accounts for changes at hypothesized copying events, and they explicitly model variations in the fidelity of individual scribes and their cumulative effect along a branch
 		\item Unlike birth-death process tree priors in isolation, birth-death process tree priors coupled with a branch spike model are \emph{fully identifiable}, which means we can estimate their birth, death, and sampling rates at the same time (Dieselhorst and Stadler 2026)
-		\item Using the existing \texttt{BDMM-Prime} (Vaughan and Stadler 2025) and \texttt{MultiTypeSpikeModel} (Ciuffi et al., forthcoming) BEAST 2 packages, we can even model the transmission process with different types of manuscripts (e.g., deluxe manuscripts vs. booklets; see Godreau et al. 2025), where each type has its own copying rates, loss rates, and distributions of scribal fidelity rates!
+		\item Using the existing \texttt{BDMM-Prime} (Vaughan and Stadler 2025) and \texttt{MultiTypeSpikeModel} (Ciuffi et al., forthcoming) BEAST packages, we can even model the transmission process with different types of manuscripts (e.g., deluxe manuscripts vs. booklets; see Godreau et al. 2025), where each type has its own copying rates, loss rates, and distributions of scribal fidelity rates!
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[KUL-standard]
-       	To account for contamination, we can use the \texttt{contacTrees} BEAST 2 package (Neureiter et al. 2022), originally developed for linguistics
+       	To account for contamination, we can use the \texttt{contacTrees} BEAST package (Neureiter et al. 2022), originally developed for linguistics
        	\begin{columns}[T]
        		\begin{column}{0.65\textwidth}
 		       	\begin{itemize}
@@ -585,7 +601,7 @@
 	\begin{itemize}
 		\item Most of the ingredients are already present in existing packages
 		\item They just need to be brought together with some minor adaptations
-		\item Once implemented, the model described here will be used in the standard template for BEAST 3 inputs generated from TEI collations using the \texttt{teiphy} Python package
+		\item Once implemented, the model described here will be used in the standard template for BEAST inputs generated from TEI collations using the \texttt{teiphy} Python package
 	\end{itemize}
 	\begin{center}
        		\includegraphics[width=0.75\textwidth]{../img/teiphy-logo.png}
@@ -602,6 +618,10 @@
 		\vspace{\baselineskip}
 		(Thanks!)
 	\end{center}
+	\vfill
+	{\color{black}\fabrandsfont }\quad jjmccollum\\
+	{\color{bluesky}\fabrandsfont }\quad @joeymccollum.bsky.social\\
+	{\color{orcid} \fabrandsfont }\quad 0000-0002-5647-0365
 \end{frame}
 
 \end{document}
