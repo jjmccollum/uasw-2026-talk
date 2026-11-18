@@ -1,2 +1,2 @@
 # uasw-2026-talk
-Slides and notes for the talk "From Biology to the Bible (and beyond) with Bayes: Lessons Learned, Idiosyncrasies Identified, and Promising Proposals," given at the 2026 University of Antwerp Stemmatology Workshop
+Slides and notes for the talk "From Biology to the Bible (and Beyond) with Bayes: Lessons Learned, Idiosyncrasies Identified, and Promising Proposals," given at the 2026 University of Antwerp Stemmatology Workshop
